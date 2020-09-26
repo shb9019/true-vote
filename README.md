@@ -1,4 +1,4 @@
-# True Vote
+# True-Vote
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/) [![Generic badge](https://img.shields.io/badge/Stage-Ideation-<COLOR>.svg)](https://shields.io/)
 
 A collective decision making platform which uses a Quadratic Voting approach instead of the traditional one-person-one-vote method.
