@@ -4,7 +4,7 @@ Want to contribute to *True Vote*? Here are some guidelines for how we accept he
 
 ## Getting in Touch
 
-Our [discord true-vote](https://discord.gg/QQB5rq) channel is the best place to ask questions or get advice.
+The [Discord general channel](https://discord.gg/KtTtaRc) under **True-Vote in the Delta Winter of Code** server is the best place to ask questions or get advice.
 
 ## Submitting a Pull Request
 
