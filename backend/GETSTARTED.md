@@ -9,7 +9,7 @@
 - Activate the virtual environment by running the command
 
   ```bash
-    activate venv/bin/activate
+    source venv/bin/activate
   ```
 
   > You will see (venv) in your terminal after you run this command
