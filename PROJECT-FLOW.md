@@ -6,7 +6,7 @@
 2. Every participant of the group will be awarded a set number of tokens when they join the group. This token count is encrypted with the user's master key and stored in the database. (We'll get to where it is stored later)
 3. To create a **poll**, the admin can create a form with a question along with different voting options( can be a MCQ or a Y/N ).
 
-> can be done by displaying a form where the admin can create a question and some option, along with the polling date and time.
+   > can be done by displaying a form where the admin can create a question and some option, along with the polling date and time.
 
 4. During the poll, the participant can pick his desired option quadratically.
 5. His/ her vote is encrypted and sent to the server along with the zn-proofs verifying his vote satisfies the requirements, which are
@@ -26,24 +26,38 @@
 - Email id _( preferably webmail, for proving one-person one-account)_
 - Password
 - Array of objects containing
+
   - the name of the group the user is part of
   - Number of tokens he/she has left in it._(Encrypted)_
+
+  #### 1. a. Token Relationship Table
+
+  - User Id
+  - Group Id
+  - Token's left _( Encrypted with user's master key )_
 
 ### 2. Group Schema
 
 - Name
 - Admin(s)
-- Array of members
+- Array of members _( Many-many relationship )_
 - Array of poll Schemas
 
 ### 3. Poll Schema
 
 - Question
 - array of options
-- polling data, time duration
-- Group the poll is a part of
-- array of votes
+- Polling start time
+- Polling End Time
+- Group the poll is a part of _(For many-to-one relationship)_
+- array of votes _( One-many relationships )_
 - result ( ? ) _(Ambiguity: If we store it in plain someone not part of the group will be able to see the result. If we encrypt it with the admin's master key, the admin might be able to manipulate the result)_
+
+  #### 3.a Vote Relationship Table
+
+  - Voter Id
+  - Poll id
+  - Encrypted Vote
 
 ## Main work
 
