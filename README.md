@@ -53,3 +53,5 @@ To be decided.
 ## Developers
 
 [Sai Hemanth B](https://www.saihemanth.com/)
+[Ishani Srivastava](https://github.com/ishanisri/)
+[Subash Aravindan](https://github.com/SubashAravindan)
