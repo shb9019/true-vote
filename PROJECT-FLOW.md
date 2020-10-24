@@ -22,42 +22,47 @@
 
 ### 1. User Schema
 
-- Username
-- Email id _( preferably webmail, for proving one-person one-account)_
-- Password
-- Array of objects containing
+- user_id **Primary Key**
+- Username **String(50)**
+- Email id _( Preferably webmail, for proving one-person one-account)_ **String(50), unique**
+- Password **String(150)** _(Unsure how we are gonna hash passwords. Therefore length is changeable)_
+- Groups user is a part of **( 1. a )** _( Many to many relationship )_
 
-  - the name of the group the user is part of
-  - Number of tokens he/she has left in it._(Encrypted)_
+  #### 1. a. Association Object for keeping track of tokens(User's Groups)
 
-  #### 1. a. Token Relationship Table
-
-  - User Id
-  - Group Id
-  - Token's left _( Encrypted with user's master key )_
+  - left_id **User_id**
+  - right_id **group_id**
+  - Token's left **string(300)** _( Encrypted with user's master key )_
 
 ### 2. Group Schema
 
-- Name
-- Admin(s)
-- Array of members _( Many-many relationship )_
-- Array of poll Schemas
+- Group_id **Primary Key**
+- Name **String(50)**
+- Admin(s) **user_id**
+- Members _( Many-many relationship )_ **( 1. a )**
+- Polls **DataBase relationship to Poll Schema** _(One-Many Relationship)_
 
 ### 3. Poll Schema
 
-- Question
-- array of options
-- Polling start time
-- Polling End Time
-- Group the poll is a part of _(For many-to-one relationship)_
-- array of votes _( One-many relationships )_
-- result ( ? ) _(Ambiguity: If we store it in plain someone not part of the group will be able to see the result. If we encrypt it with the admin's master key, the admin might be able to manipulate the result)_
+- poll_id **primary key**
+- Question **String(1000)**
+- Polling start time **DateTime**
+- Polling End Time **DateTime**
+- Group the poll is a part of **ForeignKey, group_id** _( many-to-one relationship)_
+- Options **Database relationship to options schema** _(One to many Relationship)_
+- array of votes _( many-many relationships )_
+- result ( ? ) **string(300)** _(Ambiguity: If we store it in plain someone not part of the group will be able to see the result. If we encrypt it with the admin's master key, the admin might be able to manipulate the result)_
 
-  #### 3.a Vote Relationship Table
+  #### 3. a. Association Object For Votes
 
-  - Voter Id
-  - Poll id
-  - Encrypted Vote
+  - left_id **user_id**
+  - right_id **poll_id**
+  - Encrypted Vote **String(300)**
+
+### 4 Options Schema
+
+- option*id **poll_id ( primary key )** *( Poll to which the option belongs to )*
+- option-description **string(50)**
 
 ## Main work
 
