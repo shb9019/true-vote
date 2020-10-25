@@ -32,14 +32,16 @@
 
   - left_id **User_id**
   - right_id **group_id**
-  - Token's left **string(300)** _( Encrypted with user's master key )_
+  - Token's left **varbinary** _( Encrypted with user's master key )_
 
 ### 2. Group Schema
 
 - Group_id **Primary Key**
 - Name **String(50)**
-- Admin(s) **user_id**
+- Admin(s) **( 1.a ) with tokens = 1**
 - Members _( Many-many relationship )_ **( 1. a )**
+- Applicants _(Many-many relationship)_ **( 1.a with tokens = 0)**
+- Tokens **int** _Tokens for every New User_
 - Polls **DataBase relationship to Poll Schema** _(One-Many Relationship)_
 
 ### 3. Poll Schema
@@ -49,20 +51,21 @@
 - Polling start time **DateTime**
 - Polling End Time **DateTime**
 - Group the poll is a part of **ForeignKey, group_id** _( many-to-one relationship)_
-- Options **Database relationship to options schema** _(One to many Relationship)_
+- Options **Database relationship to options schema** _(One to many Relationship, no of options is the length of this array)_
 - array of votes _( many-many relationships )_
-- result ( ? ) **string(300)** _(Ambiguity: If we store it in plain someone not part of the group will be able to see the result. If we encrypt it with the admin's master key, the admin might be able to manipulate the result)_
+- result ( ? ) **string** _Plain Text_
 
   #### 3. a. Association Object For Votes
 
   - left_id **user_id**
   - right_id **poll_id**
-  - Encrypted Vote **String(300)**
+  - Encrypted Vote **varbinary**
 
 ### 4 Options Schema
 
-- option*id **poll_id ( primary key )** *( Poll to which the option belongs to )*
-- option-description **string(50)**
+- option_id **primary key** _( Option-code for aiding in MPC)_
+- poll_id **poll_id ( primary key )** _( Poll to which the option belongs to )_
+- option-description **string**
 
 ## Main work
 
@@ -76,4 +79,3 @@ _Stuff, which requires a lot more research._
 1. All voters need to be present to perform MPC.
 2. Verifying the integrity of the vote while performing MPC.
 3. What's the use of storing encrypted votes in the database.
-4. Storing the result of a vote.
