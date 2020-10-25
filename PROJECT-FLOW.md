@@ -2,7 +2,7 @@
 
 ## How the voting occurs
 
-1. A person will create a group and can add students to it / invite the students
+1. A person will create a group and can  invite the students to be as members *( Applicant )*/ admin *( admin-applicant )*.
 2. Every participant of the group will be awarded a set number of tokens when they join the group. This token count is encrypted with the user's master key and stored in the database. (We'll get to where it is stored later)
 3. To create a **poll**, the admin can create a form with a question along with different voting options( can be a MCQ or a Y/N ).
 
@@ -33,14 +33,16 @@
   - left_id **User_id**
   - right_id **group_id**
   - Token's left **varbinary** _( Encrypted with user's master key )_
+  - Role **string** *(member||admin||applicant||admin-applicant)*
 
 ### 2. Group Schema
 
 - Group_id **Primary Key**
 - Name **String(50)**
-- Admin(s) **( 1.a ) with tokens = 1**
+- Admin(s) **( 1.a ) with role admin**
 - Members _( Many-many relationship )_ **( 1. a )**
-- Applicants _(Many-many relationship)_ **( 1.a with tokens = 0)**
+- Applicants _(Many-many relationship)_ **( 1.a with role applicant)**
+- Admin-Applicants _(Many-many relationship)_ **( 1.a with role admin-applicant)**
 - Tokens **int** _Tokens for every New User_
 - Polls **DataBase relationship to Poll Schema** _(One-Many Relationship)_
 
