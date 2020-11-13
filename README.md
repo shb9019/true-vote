@@ -34,7 +34,7 @@ Voters can now show how much they value the result by buying multiple votes, but
 ![Comparison](https://vitalik.ca/files/posts_files/qv-files/Market7.png?2e)
 
 
-Read the paper by Glen Weyl and Steven Lalley [here](https://economics.rice.edu/sites/g/files/bxs876/f/Weyl%20(paper)%20-%20Feb%202017.pdf) to know more.
+Read the paper by Glen Weyl and Steven Lalley [here](https://www.researchgate.net/publication/325310987_Quadratic_Voting_How_Mechanism_Design_Can_Radicalize_Democracy) to know more.
 
 ## What does TrueVote do?
 
