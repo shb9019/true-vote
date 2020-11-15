@@ -2,6 +2,7 @@
 from . import db
 from datetime import datetime
 from sqlalchemy_utils.types.choice import ChoiceType
+from sqlalchemy import *
 
 #"Data model for user accounts."
 class User(db.Model):
@@ -20,7 +21,7 @@ class User(db.Model):
     user_groups = db.Table('user_groups',
     db.Column('left_id', db.Integer, db.ForeignKey('users.id')),
     db.Column('right_id', db.Integer, db.ForeignKey('groups.id')),
-    #db.Column('tokens_left',db.VARBINARY,length=100),
+    db.Column('tokens_left',db.VARBINARY(150)),
     db.Column('role', ChoiceType(TYPES), default='member')
     )
 
@@ -58,7 +59,7 @@ class Poll(db.Model):
     votes = db.Table('votes',
     db.Column('left_id', db.Integer, db.ForeignKey('users.id')),
     db.Column('right_id', db.Integer, db.ForeignKey('groups.id')),
-    #db.Column('vote',db.Varbinary)
+    db.Column('vote',db.VARBINARY(150))
     )
 
     def __repr__(self):
